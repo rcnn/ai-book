@@ -1,0 +1,41 @@
+<view class="landing-page">
+  <view class="hero-section">
+    <view class="overlay"></view>
+    <image class="hero-image" mode="aspectFill" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" />
+    <view class="hero-content">
+      <view class="hero-pill">精选博主解读 · 30分钟掌握一本书</view>
+      <view class="hero-title">打造你的私人知识读书会</view>
+      <view class="hero-subtitle">沉浸式阅读体验 · 翻页动效还原纸质质感</view>
+      <button class="hero-button" bindtap="handleStart">立即开启</button>
+    </view>
+  </view>
+
+  <view class="featured-section">
+    <view class="section-header">
+      <view class="section-title">精选阅读领域</view>
+      <view class="section-subtitle">根据你的兴趣推荐顶级知识博主解读</view>
+    </view>
+    <scroll-view class="domain-scroll" scroll-x="true" enable-flex>
+      <block wx:for="{{domains}}" wx:key="key">
+        <view class="domain-card">
+          <image class="domain-cover" mode="aspectFill" src="{{item.cover}}" />
+          <view class="domain-content">
+            <view class="domain-name">{{item.name}}</view>
+            <view class="domain-description">{{item.description}}</view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <view class="highlights-section">
+    <view class="highlight-card">
+      <view class="highlight-title">AI 生成 30 分钟速读</view>
+      <view class="highlight-text">结合知识博主的表达方式，将原著内容重新组织为结构清晰、节奏分明的速读版本。</view>
+    </view>
+    <view class="highlight-card">
+      <view class="highlight-title">沉浸式翻页体验</view>
+      <view class="highlight-text">仿纸张翻页动效搭配流畅的段落排版，营造真实的阅读沉浸感。</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "name": "upsertDigest",
+  "version": "1.0.0",
+  "description": "基于书籍与博主生成或读取速读稿的云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "^3.0.0"
+  }
+}

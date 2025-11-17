@@ -1,0 +1,51 @@
+<view class="library-page">
+  <view class="search-area">
+    <view class="search-box">
+      <image class="search-icon" src="/images/icons/search.svg" />
+      <input
+        class="search-input"
+        placeholder="搜索书名 / 作者 / 博主"
+        placeholder-class="search-placeholder"
+        bindinput="handleSearchInput"
+      />
+    </view>
+  </view>
+
+  <view wx:if="{{showExistingDigestNotice}}" class="notice-card">
+    <view class="notice-badge">智能匹配</view>
+    <view class="notice-title">已为你匹配博主风格的速读内容</view>
+    <view class="notice-text">基于你喜欢的知识博主，我们优先展示已有速读稿，如果有重复生成的需求，会提示直接使用。</view>
+  </view>
+
+  <scroll-view scroll-y="true" class="book-list">
+    <block wx:for="{{filteredBooks}}" wx:key="id">
+      <view class="book-card" data-id="{{item.id}}" bindtap="handleOpenReader">
+        <image class="book-cover" mode="aspectFill" src="{{item.cover}}" />
+        <view class="book-info">
+          <view class="book-title">{{item.title}}</view>
+          <view class="book-author">{{item.author}}</view>
+          <view class="book-meta">
+            <view class="book-domain">#{{item.domain}}</view>
+            <view class="book-duration">{{item.duration}}</view>
+          </view>
+          <view class="book-experts">
+            <block wx:for="{{item.experts}}" wx:key="index">
+              <view class="expert-tag">{{item}}</view>
+            </block>
+          </view>
+          <view class="book-summary">{{item.summary}}</view>
+        </view>
+        <view wx:if="{{item.hasDigest}}" class="book-status">
+          <view class="status-dot"></view>
+          <view class="status-text">已有速读</view>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{filteredBooks.length === 0}}" class="empty-state">
+      <image class="empty-illustration" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=80" mode="aspectFill" />
+      <view class="empty-title">未找到相关书籍</view>
+      <view class="empty-text">尝试修改关键词，或者探索新的领域与博主，让推荐更精准。</view>
+    </view>
+  </scroll-view>
+</view>

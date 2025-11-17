@@ -1,0 +1,74 @@
+<view class="preferences-page">
+  <view class="header">
+    <view class="title">你的知识偏好</view>
+    <view class="subtitle">选择你感兴趣的领域和喜欢的知识博主</view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">兴趣领域</view>
+      <view class="section-subtitle">至少选择一个领域，让推荐更懂你</view>
+    </view>
+    <view class="domain-grid">
+      <block wx:for="{{domains}}" wx:key="id">
+        <view
+          class="domain-card {{selectedDomainIds.includes(item.id) ? 'selected' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="handleToggleDomain"
+        >
+          <view class="domain-gradient" style="background-image: linear-gradient(135deg, {{item.gradient[0]}}, {{item.gradient[1]}});"></view>
+          <view class="domain-content">
+            <view class="domain-name">{{item.name}}</view>
+            <view class="domain-description">{{item.description}}</view>
+          </view>
+          <view class="domain-check">
+            <view class="check-circle"></view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">知识博主</view>
+      <view class="section-subtitle">选择你喜欢的讲书风格</view>
+    </view>
+    <view class="expert-list">
+      <block wx:for="{{experts}}" wx:key="id">
+        <view
+          class="expert-card {{selectedExpertIds.includes(item.id) ? 'selected' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="handleToggleExpert"
+        >
+          <view class="expert-avatar-wrapper">
+            <image class="expert-avatar" mode="aspectFill" src="{{item.avatar}}" />
+          </view>
+          <view class="expert-info">
+            <view class="expert-name">{{item.name}}</view>
+            <view class="expert-title">{{item.title}}</view>
+            <view class="expert-expertise">
+              <block wx:for="{{item.expertise}}" wx:key="index">
+                <view class="expert-tag">{{item}}</view>
+              </block>
+            </view>
+            <view class="expert-meta">
+              <view class="expert-followers">{{item.followers}}人关注</view>
+              <view class="expert-signature">{{item.signature}}</view>
+            </view>
+          </view>
+          <view class="expert-check">
+            <view class="check-circle"></view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="selection-summary">
+      已选领域 {{selectedDomainIds.length}} · 已选博主 {{selectedExpertIds.length}}
+    </view>
+    <button class="primary-button" bindtap="handleContinue">生成推荐书单</button>
+  </view>
+</view>

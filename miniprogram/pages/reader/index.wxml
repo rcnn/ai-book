@@ -1,0 +1,47 @@
+<view class="reader-page">
+  <view class="reader-header">
+    <view class="breadcrumb" bindtap="handleFlip" data-direction="prev">返回书库</view>
+    <view class="reader-title">{{digest ? digest.title : '准备生成速读内容'}}</view>
+    <view class="expert-chip">
+      <view class="expert-indicator"></view>
+      <text>{{digest ? digest.expert : '待选择博主'}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{!digest}}" class="generate-state">
+    <view class="generate-illustration">
+      <image src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80" mode="aspectFill" />
+    </view>
+    <view class="generate-text">基于所选博主风格，生成不超过30分钟的速读稿</view>
+    <button class="generate-button" bindtap="handleGenerateDigest">开始生成</button>
+  </view>
+
+  <view wx:elif="{{digest}}" class="book-viewer">
+    <view class="page-indicator">{{currentPageIndex + 1}} / {{digest ? digest.chapters.length : 0}}</view>
+    <view class="page-flip-container">
+      <view class="page-control left" data-direction="prev" bindtap="handleFlip">
+        <view class="control-icon">‹</view>
+      </view>
+      <view class="page-content {{isAnimating ? 'turning' : ''}}">
+        <block wx:if="{{digest && digest.chapters.length > 0}}">
+          <view class="chapter-title">{{digest.chapters[currentPageIndex].title}}</view>
+          <view class="chapter-duration">{{digest.chapters[currentPageIndex].duration}}</view>
+          <view class="chapter-points">
+            <block wx:for="{{digest.chapters[currentPageIndex].keyPoints}}" wx:key="index">
+              <view class="point">• {{item}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class="page-control right" data-direction="next" bindtap="handleFlip">
+        <view class="control-icon">›</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="duration-footer" wx:if="{{digest}}">
+    <view class="footer-title">总阅读时长</view>
+    <view class="footer-duration">{{digest ? digest.totalDurationMinutes : 0}} 分钟速读</view>
+    <view class="footer-note">每一章节都精炼至核心观点，适合碎片时间阅读。</view>
+  </view>
+</view>

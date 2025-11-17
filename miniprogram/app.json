@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/landing/index",
+    "pages/preferences/index",
+    "pages/library/index",
+    "pages/reader/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0F172A",
+    "navigationBarTitleText": "Vibe 阅读",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

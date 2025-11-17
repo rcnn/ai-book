@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="header">
+    <view class="badge-pill">VIBE 阅读 · 云开发</view>
+    <view class="title">打造属于你的 30 分钟知识快读</view>
+    <view class="subtitle">接入云开发能力，体验沉浸式翻页阅读</view>
+  </view>
+
+  <view class="content">
+    <view class="info-card">
+      <view class="card-title">当前身份</view>
+      <view class="card-row">
+        <view class="status-dot {{isLoadingOpenId ? 'loading' : 'ready'}}"></view>
+        <view class="openid-label">OpenID</view>
+        <view class="openid-value">{{isLoadingOpenId ? '获取中…' : (openid || '未获取')}} </view>
+      </view>
+      <view class="card-desc">身份信息仅用于云开发调用示例，不会存储在本地。</view>
+    </view>
+
+    <view class="feature-section">
+      <view class="section-header">
+        <view class="section-title">功能亮点</view>
+        <view class="section-subtitle">点击卡片切换关注的核心体验</view>
+      </view>
+      <view class="feature-grid">
+        <block wx:for="{{features}}" wx:key="id">
+          <view
+            class="feature-card {{item.isActive ? 'active' : ''}}"
+            data-id="{{item.id}}"
+            bindtap="handleToggleFeature"
+          >
+            <view class="feature-icon">{{item.icon}}</view>
+            <view class="feature-content">
+              <view class="feature-title">{{item.title}}</view>
+              <view class="feature-desc">{{item.description}}</view>
+            </view>
+            <view class="feature-indicator">
+              <view class="indicator-track"></view>
+              <view class="indicator-thumb {{item.isActive ? 'on' : ''}}"></view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="cta-card">
+      <view class="cta-text">
+        从「精选博主」开始，让 AI 帮你 30 分钟掌握一本书。
+      </view>
+      <button class="cta-button" bindtap="handleExplore">立即体验</button>
+    </view>
+  </view>
+
+  <view class="footer">
+    <cloudbase-badge show-text="{{true}}" />
+  </view>
+</view>
