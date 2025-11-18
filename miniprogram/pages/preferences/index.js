@@ -66,37 +66,67 @@ const domainList = [
 
 Page({
   data: {
-    domains: domainList,
-    experts: expertList,
+    domains: domainList.map(domain => ({
+      ...domain,
+      isSelected: false
+    })),
+    experts: expertList.map(expert => ({
+      ...expert,
+      isSelected: false
+    })),
     selectedDomainIds: [],
     selectedExpertIds: []
   },
 
   handleToggleDomain(event) {
     const domainId = event.currentTarget.dataset.id;
-    const { selectedDomainIds } = this.data;
+    const { selectedDomainIds, domains } = this.data;
     const isSelected = selectedDomainIds.includes(domainId);
 
     const nextSelected = isSelected
       ? selectedDomainIds.filter(id => id !== domainId)
       : [...selectedDomainIds, domainId];
 
+    const nextDomains = domains.map(domain => {
+      if (domain.id !== domainId) {
+        return domain;
+      }
+
+      return {
+        ...domain,
+        isSelected: !isSelected
+      };
+    });
+
     this.setData({
-      selectedDomainIds: nextSelected
+      selectedDomainIds: nextSelected,
+      domains: nextDomains
     });
   },
 
   handleToggleExpert(event) {
     const expertId = event.currentTarget.dataset.id;
-    const { selectedExpertIds } = this.data;
+    const { selectedExpertIds, experts } = this.data;
     const isSelected = selectedExpertIds.includes(expertId);
 
     const nextSelected = isSelected
       ? selectedExpertIds.filter(id => id !== expertId)
       : [...selectedExpertIds, expertId];
 
+    const nextExperts = experts.map(expert => {
+      if (expert.id !== expertId) {
+        return expert;
+      }
+
+      return {
+        ...expert,
+        isSelected: !isSelected
+      };
+    });
+
     this.setData({
-      selectedExpertIds: nextSelected
+      selectedExpertIds: nextSelected,
+      experts: nextExperts
     });
   },
 

@@ -1,7 +1,19 @@
 {
   "libVersion": "3.11.0",
   "projectname": "ai-book",
-  "condition": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/preferences/index",
+          "pathName": "pages/preferences/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  },
   "setting": {
     "urlCheck": true,
     "coverView": true,

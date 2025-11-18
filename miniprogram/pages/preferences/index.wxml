@@ -10,19 +10,22 @@
       <view class="section-subtitle">至少选择一个领域，让推荐更懂你</view>
     </view>
     <view class="domain-grid">
-      <block wx:for="{{domains}}" wx:key="id">
+      <block wx:for="{{domains}}" wx:key="id" wx:for-item="domain" wx:for-index="domainIndex">
         <view
-          class="domain-card {{selectedDomainIds.includes(item.id) ? 'selected' : ''}}"
-          data-id="{{item.id}}"
+          class="domain-card {{domain.isSelected ? 'selected' : ''}}"
+          data-id="{{domain.id}}"
+          data-index="{{domainIndex}}"
           bindtap="handleToggleDomain"
         >
-          <view class="domain-gradient" style="background-image: linear-gradient(135deg, {{item.gradient[0]}}, {{item.gradient[1]}});"></view>
+          <view class="domain-gradient" style="background-image: linear-gradient(135deg, {{domain.gradient[0]}}, {{domain.gradient[1]}});"></view>
           <view class="domain-content">
-            <view class="domain-name">{{item.name}}</view>
-            <view class="domain-description">{{item.description}}</view>
+            <view class="domain-name">{{domain.name}}</view>
+            <view class="domain-description">{{domain.description}}</view>
           </view>
           <view class="domain-check">
-            <view class="check-circle"></view>
+            <view class="check-circle">
+              <text wx:if="{{domain.isSelected}}" class="check-icon">✓</text>
+            </view>
           </view>
         </view>
       </block>
@@ -35,30 +38,33 @@
       <view class="section-subtitle">选择你喜欢的讲书风格</view>
     </view>
     <view class="expert-list">
-      <block wx:for="{{experts}}" wx:key="id">
+      <block wx:for="{{experts}}" wx:key="id" wx:for-item="expert" wx:for-index="expertIndex">
         <view
-          class="expert-card {{selectedExpertIds.includes(item.id) ? 'selected' : ''}}"
-          data-id="{{item.id}}"
+          class="expert-card {{expert.isSelected ? 'selected' : ''}}"
+          data-id="{{expert.id}}"
+          data-index="{{expertIndex}}"
           bindtap="handleToggleExpert"
         >
           <view class="expert-avatar-wrapper">
-            <image class="expert-avatar" mode="aspectFill" src="{{item.avatar}}" />
+            <image class="expert-avatar" mode="aspectFill" src="{{expert.avatar}}" />
           </view>
           <view class="expert-info">
-            <view class="expert-name">{{item.name}}</view>
-            <view class="expert-title">{{item.title}}</view>
+            <view class="expert-name">{{expert.name}}</view>
+            <view class="expert-title">{{expert.title}}</view>
             <view class="expert-expertise">
-              <block wx:for="{{item.expertise}}" wx:key="index">
-                <view class="expert-tag">{{item}}</view>
+              <block wx:for="{{expert.expertise}}" wx:key="index" wx:for-item="badge">
+                <view class="expert-tag">{{badge}}</view>
               </block>
             </view>
             <view class="expert-meta">
-              <view class="expert-followers">{{item.followers}}人关注</view>
-              <view class="expert-signature">{{item.signature}}</view>
+              <view class="expert-followers">{{expert.followers}}人关注</view>
+              <view class="expert-signature">{{expert.signature}}</view>
             </view>
           </view>
           <view class="expert-check">
-            <view class="check-circle"></view>
+            <view class="check-circle">
+              <text wx:if="{{expert.isSelected}}" class="check-icon">✓</text>
+            </view>
           </view>
         </view>
       </block>
